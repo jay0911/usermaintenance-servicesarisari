@@ -17,10 +17,15 @@ public class UserMaintenanceEndPoint {
 	
 	@PostMapping("/registeruserservice")
 	public AjaxResponseBody saveRegistration(@RequestBody RegisterFormDTO dto){
-		userMaintenanceService.saveRegistration(dto);
-		
 		AjaxResponseBody response = new AjaxResponseBody();
 		
+		if(userMaintenanceService.isUsernameExisting(dto)){
+			response.setMsg("success");
+			response.setCode("400");
+			return response;
+		}
+		
+		userMaintenanceService.saveRegistration(dto);	
 		response.setMsg("success");
 		response.setCode("200");
 		return response;

@@ -41,4 +41,14 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		upi.setUser(u);
 	}
 
+	@Override
+	public boolean isUsernameExisting(RegisterFormDTO dto) {
+		// TODO Auto-generated method stub
+		User u = new User();
+		UserPrivateInfo upi = new UserPrivateInfo();
+	
+		this.setUserDetailsFromDTO(dto,u,upi);
+		return userMaintenanceDao.isUsernameExisting(upi);
+	}
+
 }

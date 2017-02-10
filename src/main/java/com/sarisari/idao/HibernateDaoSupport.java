@@ -1,5 +1,6 @@
 package com.sarisari.idao;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class HibernateDaoSupport {
 	     */
 	    public Session getSessionFactory() {
 	        return sessionFactory.getCurrentSession();
+	    }
+	    
+	    public Query customSelectQuery(String stringQuery){    	
+	    	return getSessionFactory().createQuery(stringQuery);
 	    }
 
 }

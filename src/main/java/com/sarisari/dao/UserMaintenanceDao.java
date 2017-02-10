@@ -10,4 +10,5 @@ import com.sarisari.model.UserPrivateInfo;
 @Transactional
 public interface UserMaintenanceDao {
 	public void saveRegistration(UserPrivateInfo user);
+	public boolean isUsernameExisting(UserPrivateInfo user);
 }
