@@ -20,7 +20,6 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean isUsernameExisting(UserPrivateInfo user) {
 		// TODO Auto-generated method stub
 		
@@ -28,15 +27,22 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 		.setParameter("username", user.getUsername())
 		.list();
 	
-		List<UserPrivateInfo> userlist =customSelectQuery(USER_FETCH_HQL)
-				.setParameter("username", user.getUsername())
-				.list();
+		List<UserPrivateInfo> userlist =this.getUserPrivateInfo(user);
 		
 		if(userlist.size() > 0){
 			return true;
 		}
 
 		return false;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UserPrivateInfo> getUserPrivateInfo(UserPrivateInfo user) {
+		// TODO Auto-generated method stub
+		return customSelectQuery(USER_FETCH_HQL)
+				.setParameter("username", user.getUsername())
+				.list();
 	}
 
 }

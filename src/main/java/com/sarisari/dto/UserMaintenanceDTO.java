@@ -1,6 +1,6 @@
 package com.sarisari.dto;
 
-public class RegisterFormDTO {
+public class UserMaintenanceDTO {
 	private String fullname;
 	private String contactnumber;
 	private String emailaddress;
@@ -8,8 +8,10 @@ public class RegisterFormDTO {
 	private String gender;
 	private String username;
 	private String password;
+	private int points;
+	private String usergroup;
 	
-	public RegisterFormDTO(){}
+	public UserMaintenanceDTO(){}
 	
 	public String getFullname() {
 		return fullname;
@@ -57,5 +59,21 @@ public class RegisterFormDTO {
 	@Override
 	public String toString(){
 		return fullname + " " + contactnumber + " " + emailaddress + " " + address+ " " +gender+ " " + username+ " " + password;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public String getUsergroup() {
+		return usergroup;
+	}
+
+	public void setUsergroup(String usergroup) {
+		this.usergroup = usergroup;
 	}
 }

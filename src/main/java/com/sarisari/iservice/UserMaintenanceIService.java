@@ -1,10 +1,12 @@
 package com.sarisari.iservice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sarisari.dao.UserMaintenanceDao;
-import com.sarisari.dto.RegisterFormDTO;
+import com.sarisari.dto.UserMaintenanceDTO;
 import com.sarisari.model.User;
 import com.sarisari.model.UserPrivateInfo;
 import com.sarisari.service.UserMaintenanceService;
@@ -16,7 +18,7 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 	private UserMaintenanceDao userMaintenanceDao;
 	
 	@Override
-	public void saveRegistration(RegisterFormDTO dto) {
+	public void saveRegistration(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub	
 		User u = new User();
 		UserPrivateInfo upi = new UserPrivateInfo();
@@ -26,7 +28,7 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		userMaintenanceDao.saveRegistration(upi);
 	}
 	
-	private void setUserDetailsFromDTO(RegisterFormDTO dto,User u,UserPrivateInfo upi){
+	private void setUserDetailsFromDTO(UserMaintenanceDTO dto,User u,UserPrivateInfo upi){
 		u.setAddress(dto.getAddress());
 		u.setContactnumber(dto.getContactnumber());
 		u.setEmailaddress(dto.getEmailaddress());
@@ -42,13 +44,23 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 	}
 
 	@Override
-	public boolean isUsernameExisting(RegisterFormDTO dto) {
+	public boolean isUsernameExisting(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
 		User u = new User();
 		UserPrivateInfo upi = new UserPrivateInfo();
 	
 		this.setUserDetailsFromDTO(dto,u,upi);
 		return userMaintenanceDao.isUsernameExisting(upi);
+	}
+
+	@Override
+	public List<UserPrivateInfo> getUserPrivateInfo(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		User u = new User();
+		UserPrivateInfo upi = new UserPrivateInfo();
+	
+		this.setUserDetailsFromDTO(dto,u,upi);
+		return userMaintenanceDao.getUserPrivateInfo(upi);
 	}
 
 }

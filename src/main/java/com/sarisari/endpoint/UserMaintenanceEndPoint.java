@@ -1,12 +1,15 @@
 package com.sarisari.endpoint;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sarisari.dto.RegisterFormDTO;
+import com.sarisari.dto.UserMaintenanceDTO;
 import com.sarisari.model.AjaxResponseBody;
+import com.sarisari.model.UserPrivateInfo;
 import com.sarisari.service.UserMaintenanceService;
 
 @RestController
@@ -16,7 +19,7 @@ public class UserMaintenanceEndPoint {
 	UserMaintenanceService userMaintenanceService;
 	
 	@PostMapping("/registeruserservice")
-	public AjaxResponseBody saveRegistration(@RequestBody RegisterFormDTO dto){
+	public AjaxResponseBody saveRegistration(@RequestBody UserMaintenanceDTO dto){
 		AjaxResponseBody response = new AjaxResponseBody();
 		
 		if(userMaintenanceService.isUsernameExisting(dto)){
@@ -29,6 +32,11 @@ public class UserMaintenanceEndPoint {
 		response.setMsg("success");
 		response.setCode("200");
 		return response;
+	}
+	
+	@PostMapping("/checkcredentials")
+	public List<UserPrivateInfo> checkCredentials(@RequestBody UserMaintenanceDTO dto){
+		return userMaintenanceService.getUserPrivateInfo(dto);
 	}
 
 }
