@@ -38,5 +38,10 @@ public class UserMaintenanceEndPoint {
 	public List<UserPrivateInfo> checkCredentials(@RequestBody UserMaintenanceDTO dto){
 		return userMaintenanceService.getUserPrivateInfo(dto);
 	}
+	
+	@PostMapping("/getuserinfo")
+	public UserMaintenanceDTO currentuserinfo(@RequestBody UserMaintenanceDTO dto){
+		return userMaintenanceService.getuserloggedinInfo(dto);
+	}
 
 }

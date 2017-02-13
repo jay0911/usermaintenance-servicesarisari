@@ -42,6 +42,16 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		
 		upi.setUser(u);
 	}
+	
+	private void setDTO(UserMaintenanceDTO dto,UserPrivateInfo upi){
+		dto.setAddress(upi.getUser().getAddress());
+		dto.setContactnumber(upi.getUser().getContactnumber());
+		dto.setEmailaddress(upi.getUser().getEmailaddress());
+		dto.setFullname(upi.getUser().getFullname());
+		dto.setGender(upi.getUser().getGender());
+		dto.setPoints(upi.getPoints());
+		dto.setUsername(upi.getUsername());
+	}
 
 	@Override
 	public boolean isUsernameExisting(UserMaintenanceDTO dto) {
@@ -61,6 +71,19 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 	
 		this.setUserDetailsFromDTO(dto,u,upi);
 		return userMaintenanceDao.getUserPrivateInfo(upi);
+	}
+	
+	@Override
+	public UserMaintenanceDTO getuserloggedinInfo(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		User u = new User();
+		UserPrivateInfo upi = new UserPrivateInfo();
+	
+		this.setUserDetailsFromDTO(dto,u,upi);
+		List<UserPrivateInfo> listInfo = userMaintenanceDao.getUserPrivateInfo(upi);
+		UserMaintenanceDTO returndto = new UserMaintenanceDTO();
+		this.setDTO(returndto,listInfo.get(0));
+		return returndto;
 	}
 
 }

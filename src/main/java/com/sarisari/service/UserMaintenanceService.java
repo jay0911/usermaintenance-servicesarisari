@@ -9,4 +9,5 @@ public interface UserMaintenanceService {
 	public void saveRegistration(UserMaintenanceDTO dto);
 	public boolean isUsernameExisting(UserMaintenanceDTO dto);
 	public List<UserPrivateInfo> getUserPrivateInfo(UserMaintenanceDTO dto);
+	public UserMaintenanceDTO getuserloggedinInfo(UserMaintenanceDTO dto);
 }
