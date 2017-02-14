@@ -10,4 +10,5 @@ public interface UserMaintenanceService {
 	public boolean isUsernameExisting(UserMaintenanceDTO dto);
 	public List<UserPrivateInfo> getUserPrivateInfo(UserMaintenanceDTO dto);
 	public UserMaintenanceDTO getuserloggedinInfo(UserMaintenanceDTO dto);
+	public void modifyuser(UserMaintenanceDTO dto);
 }

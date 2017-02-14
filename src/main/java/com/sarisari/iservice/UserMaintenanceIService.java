@@ -86,4 +86,14 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		return returndto;
 	}
 
+	@Override
+	public void modifyuser(UserMaintenanceDTO dto) {
+		// TODO Auto-generated method stub
+		User u = new User();
+		UserPrivateInfo upi = new UserPrivateInfo();
+	
+		this.setUserDetailsFromDTO(dto,u,upi);
+		userMaintenanceDao.modifyUser(upi);
+	}
+
 }

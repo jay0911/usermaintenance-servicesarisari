@@ -23,7 +23,7 @@ public class UserMaintenanceEndPoint {
 		AjaxResponseBody response = new AjaxResponseBody();
 		
 		if(userMaintenanceService.isUsernameExisting(dto)){
-			response.setMsg("success");
+			response.setMsg("user exist");
 			response.setCode("400");
 			return response;
 		}
@@ -42,6 +42,15 @@ public class UserMaintenanceEndPoint {
 	@PostMapping("/getuserinfo")
 	public UserMaintenanceDTO currentuserinfo(@RequestBody UserMaintenanceDTO dto){
 		return userMaintenanceService.getuserloggedinInfo(dto);
+	}
+	
+	@PostMapping("/modifyuser")
+	public AjaxResponseBody modifyAccount(@RequestBody UserMaintenanceDTO dto){
+		AjaxResponseBody response = new AjaxResponseBody();
+		userMaintenanceService.modifyuser(dto);	
+		response.setMsg("success");
+		response.setCode("200");
+		return response;
 	}
 
 }
