@@ -18,6 +18,8 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 	private static final String USER_MODIFY_HQL = "update User set fullname=:fullname, contactnumber=:contactnumber, emailaddress=:emailaddress, address=:address, gender=:gender where userid=:userid";
 	private static final String USERPRIVATEINFO_MODIFY_HQL = "update UserPrivateInfo set password=:password where id=:id";
 	
+	private static final String USER_FETCH_WITH_STORE = "from User where u.userid=:userid";
+	
 	@Override
 	public void saveRegistration(UserPrivateInfo user) {
 		getSessionFactory().save(user);
@@ -31,7 +33,7 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 		.setParameter("username", user.getUsername())
 		.list();
 	
-		List<UserPrivateInfo> userlist =this.getUserPrivateInfo(user);
+		List<User> userlist =this.getUserPrivateInfo(user);
 		
 		if(userlist.size() > 0){
 			return true;
@@ -42,9 +44,9 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<UserPrivateInfo> getUserPrivateInfo(UserPrivateInfo user) {
+	public List<User> getUserPrivateInfo(UserPrivateInfo user) {
 		// TODO Auto-generated method stub
-		return customSelectQuery(USER_FETCH_HQL)
+		return customSelectQuery(USER_FETCH_WITH_STORE)
 				.setParameter("username", user.getUsername())
 				.list();
 	}
@@ -52,9 +54,9 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 	@Override
 	public void modifyUser(UserPrivateInfo userPrivateInfo) {
 		// TODO Auto-generated method stub
-		List<UserPrivateInfo> listuser = getUserPrivateInfo(userPrivateInfo);
-		userPrivateInfo.setId(listuser.get(0).getId());
-		userPrivateInfo.getUser().setUserid(listuser.get(0).getUser().getUserid());
+		List<User> listuser = getUserPrivateInfo(userPrivateInfo);
+		userPrivateInfo.setId(listuser.get(0).getUserPrivateInfo().getId());
+		userPrivateInfo.getUser().setUserid(listuser.get(0).getUserid());
 		
 		this.modifyUserPrivateInfotbl(userPrivateInfo);
 		this.modifyUsertbl(userPrivateInfo.getUser());

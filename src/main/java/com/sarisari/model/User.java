@@ -1,10 +1,13 @@
 package com.sarisari.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +32,14 @@ public class User {
 	
 	@Column(name = "gender")
 	private String gender;
+	
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid")
+	private StoreOwner storeOwner;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid")
+	private UserPrivateInfo userPrivateInfo;
 	
 	public User(){}
 	
@@ -67,6 +78,22 @@ public class User {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public StoreOwner getStoreOwner() {
+		return storeOwner;
+	}
+
+	public void setStoreOwner(StoreOwner storeOwner) {
+		this.storeOwner = storeOwner;
+	}
+
+	public UserPrivateInfo getUserPrivateInfo() {
+		return userPrivateInfo;
+	}
+
+	public void setUserPrivateInfo(UserPrivateInfo userPrivateInfo) {
+		this.userPrivateInfo = userPrivateInfo;
 	}
 
 }
