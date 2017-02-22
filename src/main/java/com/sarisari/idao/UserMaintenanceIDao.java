@@ -18,22 +18,21 @@ public class UserMaintenanceIDao extends HibernateDaoSupport implements UserMain
 	private static final String USER_MODIFY_HQL = "update User set fullname=:fullname, contactnumber=:contactnumber, emailaddress=:emailaddress, address=:address, gender=:gender where userid=:userid";
 	private static final String USERPRIVATEINFO_MODIFY_HQL = "update UserPrivateInfo set password=:password where id=:id";
 	
-	private static final String USER_FETCH_WITH_STORE = "from User where u.userid=:userid";
+	private static final String USER_FETCH_WITH_STORE = "from User u left join fetch u.storeOwner so join fetch u.userPrivateInfo up where up.username=:username";
 	
 	@Override
 	public void saveRegistration(UserPrivateInfo user) {
 		getSessionFactory().save(user);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isUsernameExisting(UserPrivateInfo user) {
 		// TODO Auto-generated method stub
-		
-		customSelectQuery(USER_FETCH_HQL)
-		.setParameter("username", user.getUsername())
-		.list();
-	
-		List<User> userlist =this.getUserPrivateInfo(user);
+
+		List<User> userlist = customSelectQuery(USER_FETCH_HQL)
+				.setParameter("username", user.getUsername())
+				.list();
 		
 		if(userlist.size() > 0){
 			return true;

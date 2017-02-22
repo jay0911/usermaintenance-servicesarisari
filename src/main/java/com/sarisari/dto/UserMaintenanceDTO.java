@@ -10,6 +10,9 @@ public class UserMaintenanceDTO {
 	private String password;
 	private int points;
 	private String usergroup;
+	private int storeid;
+	private String storename;
+	private String storedetails;
 	
 	public UserMaintenanceDTO(){}
 	
@@ -75,5 +78,29 @@ public class UserMaintenanceDTO {
 
 	public void setUsergroup(String usergroup) {
 		this.usergroup = usergroup;
+	}
+
+	public int getStoreid() {
+		return storeid;
+	}
+
+	public void setStoreid(int storeid) {
+		this.storeid = storeid;
+	}
+
+	public String getStorename() {
+		return storename;
+	}
+
+	public void setStorename(String storename) {
+		this.storename = storename;
+	}
+
+	public String getStoredetails() {
+		return storedetails;
+	}
+
+	public void setStoredetails(String storedetails) {
+		this.storedetails = storedetails;
 	}
 }

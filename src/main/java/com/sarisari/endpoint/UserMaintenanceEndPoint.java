@@ -1,6 +1,6 @@
 package com.sarisari.endpoint;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sarisari.dto.UserMaintenanceDTO;
 import com.sarisari.model.AjaxResponseBody;
-import com.sarisari.model.UserPrivateInfo;
 import com.sarisari.service.UserMaintenanceService;
 
 @RestController
@@ -35,7 +34,7 @@ public class UserMaintenanceEndPoint {
 	}
 	
 	@PostMapping("/checkcredentials")
-	public List<UserPrivateInfo> checkCredentials(@RequestBody UserMaintenanceDTO dto){
+	public UserMaintenanceDTO checkCredentials(@RequestBody UserMaintenanceDTO dto){
 		return userMaintenanceService.getUserPrivateInfo(dto);
 	}
 	

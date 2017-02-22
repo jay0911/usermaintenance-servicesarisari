@@ -43,14 +43,37 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		upi.setUser(u);
 	}
 	
-	private void setDTO(UserMaintenanceDTO dto,UserPrivateInfo upi){
-		dto.setAddress(upi.getUser().getAddress());
-		dto.setContactnumber(upi.getUser().getContactnumber());
-		dto.setEmailaddress(upi.getUser().getEmailaddress());
-		dto.setFullname(upi.getUser().getFullname());
-		dto.setGender(upi.getUser().getGender());
-		dto.setPoints(upi.getPoints());
-		dto.setUsername(upi.getUsername());
+	private void setDTO(UserMaintenanceDTO dto,User upi){
+		if(upi.getAddress() != null)
+		dto.setAddress(upi.getAddress());
+		
+		if(upi.getContactnumber() != null)
+		dto.setContactnumber(upi.getContactnumber());
+		
+		if(upi.getEmailaddress() != null)
+		dto.setEmailaddress(upi.getEmailaddress());
+		
+		if(upi.getUserPrivateInfo().getPassword() != null)
+		dto.setPassword(upi.getUserPrivateInfo().getPassword());
+		
+		if(upi.getFullname() != null)
+		dto.setFullname(upi.getFullname());
+		
+		if(upi.getGender() != null)
+		dto.setGender(upi.getGender());
+		
+		dto.setPoints(upi.getUserPrivateInfo().getPoints());
+		
+		if(upi.getUserPrivateInfo().getUsername() != null)
+		dto.setUsername(upi.getUserPrivateInfo().getUsername());
+		
+		dto.setStoreid(upi.getStoreOwner().getStoreid());
+		
+		if(upi.getStoreOwner().getName() != null)
+		dto.setStorename(upi.getStoreOwner().getName());
+		
+		if(upi.getStoreOwner().getDetails() != null)
+		dto.setStoredetails(upi.getStoreOwner().getDetails());
 	}
 
 	@Override
@@ -64,13 +87,16 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 	}
 
 	@Override
-	public List<UserPrivateInfo> getUserPrivateInfo(UserMaintenanceDTO dto) {
+	public UserMaintenanceDTO getUserPrivateInfo(UserMaintenanceDTO dto) {
 		// TODO Auto-generated method stub
 		User u = new User();
 		UserPrivateInfo upi = new UserPrivateInfo();
 	
 		this.setUserDetailsFromDTO(dto,u,upi);
-		return userMaintenanceDao.getUserPrivateInfo(upi);
+		List<User> user=userMaintenanceDao.getUserPrivateInfo(upi);
+		UserMaintenanceDTO returnDTO = new UserMaintenanceDTO();
+		setDTO(returnDTO,user.get(0));
+		return returnDTO;
 	}
 	
 	@Override
@@ -80,7 +106,7 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		UserPrivateInfo upi = new UserPrivateInfo();
 	
 		this.setUserDetailsFromDTO(dto,u,upi);
-		List<UserPrivateInfo> listInfo = userMaintenanceDao.getUserPrivateInfo(upi);
+		List<User> listInfo = userMaintenanceDao.getUserPrivateInfo(upi);
 		UserMaintenanceDTO returndto = new UserMaintenanceDTO();
 		this.setDTO(returndto,listInfo.get(0));
 		return returndto;

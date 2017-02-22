@@ -33,12 +33,10 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private StoreOwner storeOwner;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
 	private UserPrivateInfo userPrivateInfo;
 	
 	public User(){}
