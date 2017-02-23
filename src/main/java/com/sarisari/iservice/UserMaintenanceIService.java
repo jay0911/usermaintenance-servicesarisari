@@ -62,17 +62,22 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		if(upi.getGender() != null)
 		dto.setGender(upi.getGender());
 		
+		if(upi.getUserPrivateInfo() != null)
 		dto.setPoints(upi.getUserPrivateInfo().getPoints());
 		
-		if(upi.getUserPrivateInfo().getUsername() != null)
+		if(upi.getUserPrivateInfo() != null)
 		dto.setUsername(upi.getUserPrivateInfo().getUsername());
 		
+		if(upi.getUserPrivateInfo() != null)
+		dto.setUsergroup(upi.getUserPrivateInfo().getUsergroup());
+		
+		if(upi.getStoreOwner() != null)
 		dto.setStoreid(upi.getStoreOwner().getStoreid());
 		
-		if(upi.getStoreOwner().getName() != null)
+		if(upi.getStoreOwner() != null)
 		dto.setStorename(upi.getStoreOwner().getName());
 		
-		if(upi.getStoreOwner().getDetails() != null)
+		if(upi.getStoreOwner() != null)
 		dto.setStoredetails(upi.getStoreOwner().getDetails());
 	}
 
