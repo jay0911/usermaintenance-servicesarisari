@@ -1,9 +1,7 @@
 package com.sarisari.service;
 
-import java.util.List;
 
 import com.sarisari.dto.UserMaintenanceDTO;
-import com.sarisari.model.User;
 
 public interface UserMaintenanceService {
 	public void saveRegistration(UserMaintenanceDTO dto);
