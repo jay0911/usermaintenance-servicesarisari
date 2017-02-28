@@ -47,6 +47,9 @@ public class UserMaintenanceIService implements UserMaintenanceService{
 		if(upi.getAddress() != null)
 		dto.setAddress(upi.getAddress());
 		
+		if(upi.getUserid() != 0)
+		dto.setUserid(upi.getUserid());
+		
 		if(upi.getContactnumber() != null)
 		dto.setContactnumber(upi.getContactnumber());
 		

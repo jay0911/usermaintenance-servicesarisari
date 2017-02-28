@@ -1,6 +1,7 @@
 package com.sarisari.dto;
 
 public class UserMaintenanceDTO {
+	private int userid;
 	private String fullname;
 	private String contactnumber;
 	private String emailaddress;
@@ -102,5 +103,13 @@ public class UserMaintenanceDTO {
 
 	public void setStoredetails(String storedetails) {
 		this.storedetails = storedetails;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }
